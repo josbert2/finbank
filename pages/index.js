@@ -21,6 +21,7 @@ export default function Home() {
   const [image, setImage] = useState(null)
   const [updatingBank, setUpdatingBank] = useState(null)
   const [totalSaldo, setTotalSaldo] = useState(0)
+  const [BankCount, setBankCount] = useState(0)
 
   const bankNameRef = useRef()
   const numeroRef = useRef()
@@ -60,6 +61,8 @@ export default function Home() {
     const rut = rutRef.current.value || null
     const nombres = nombresRef.current.value || null
     const apellidos = apellidosRef.current.value || null
+
+    
 
 
    
@@ -133,11 +136,21 @@ export default function Home() {
     return "$" + Number(amount).toLocaleString('es-CL');
   }
 
+  const getCountAllBanks = async () => {
+    const res = await fetch('http://localhost:3000/api/getCountAllBanks')
+    const response = await res.json()
+    setBankCount(response.count)
+  }
 
   useEffect(() => {
     getBanks()
+    getCountAllBanks()
   }, [])
 
+
+  // querys prisma
+
+  
 
 
   return (
@@ -172,7 +185,7 @@ export default function Home() {
       <div class="grid grid-cols-3">
         <div class="bg-white rounded-lg">
           <div class=" py-3">
-          <h2 class="text-neutral-700 text-center">My Accounts (0) </h2>
+          <h2 class="text-neutral-700 text-center">My Accounts ({BankCount}) </h2>
           </div>
         </div>
       </div>
