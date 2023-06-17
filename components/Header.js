@@ -27,24 +27,7 @@ const Header = () => {
                 
                 </div>
             </header>
-            <div class="px-20 mt-10">
-                <div class="grid grid-cols-12">
-                    <div class="col-span-3">
-                        <div class="bg-white shadow rounded-[9.9px]">
-                            <div class="flex items-center px-6 py-5">
-                                <div class="text-black font-bold">
-                                    My cards
-                                </div>
-                                <div class="ml-auto">
-                                    <button class="bg-primary-500 rounded-[9.9px] font-semibold py-[8px] px-3">
-                                        Add new card
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     );
 }

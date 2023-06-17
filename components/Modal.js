@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 const Modal = ({ onClose, children, title }) => {
+
+    const [active, setActive] = React.useState(false);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => setActive(true), 100);
+        return () => clearTimeout(timeout);
+    }, []);
+
    const handleCloseClick = (e) => {
-      e.preventDefault();
-      onClose();
+        e.preventDefault();
+        setActive(false);
+        setTimeout(() => {
+        onClose();
+        }, 300);
    }
 
    const modalContent = (
-      <div className="modal-overlay">
-          <div className="modal-wrapper">
+      <div className={`modal-overlay ${active && 'active'}`}>
+          <div className={`modal-wrapper ${active && 'active'}`}>
               <div className="modal">
                   <div className="modal-header">
                       <a href="#" class="text-gray-500" onClick={handleCloseClick}>
@@ -18,7 +29,7 @@ const Modal = ({ onClose, children, title }) => {
                            </svg>
                       </a>
                   </div>
-                  {title && <h1>{title}</h1>}
+                  {title && <h1 class="text-center font-semibold text-gray-500">{title}</h1>}
                   <div className="h-full modal-body">{children}</div>
               </div>
           </div>
